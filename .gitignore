@@ -1,0 +1,14 @@
+# settings
+settings.json
+
+# test
+test.ipynb
+output.*
+resp.json
+
+# IDE
+.vscode
+.idea
+
+# download
+download
