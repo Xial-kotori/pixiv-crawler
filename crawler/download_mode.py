@@ -1,8 +1,9 @@
 import json
+import time
 from json import JSONDecodeError
 
 from crawler.save_image import save_img, save_gif
-from crawler.tool import try_get, save_info
+from crawler.tool import try_get, save_info, get_info_local
 from pathlib import Path
 
 
@@ -48,8 +49,7 @@ def download_user(args):
     path = (Path(args.path) / "user" / args.user_id).resolve()
 
     try:
-        with open(path / f"{args.user_id}_info.json") as f:
-            user_info = json.load(f)
+        user_info = get_info_local(args, path / f"{args.user_id}_info.json")
     except (JSONDecodeError, FileNotFoundError):
         url = f"https://www.pixiv.net/ajax/user/{args.user_id}/profile/all?lang=zh"
         resp = try_get(args, url, headers=args.headers)
@@ -88,8 +88,7 @@ def download_series(args, ser_path: Path = "", log: str = ""):
     tot_img = resp_info["page"]["total"]
 
     try:
-        with open(ser_path / f"{args.series_id}_info.json") as f:
-            ser_info = json.load(f)
+        ser_info = get_info_local(args, ser_path / f"{args.series_id}_info.json")
     except (JSONDecodeError, FileNotFoundError):
         ser_info = resp.json()["body"]
         save_info(ser_path, args.series_id, ser_info)

@@ -9,8 +9,9 @@ output*
 # IDE
 .vscode
 .idea
+.VSCodeCounter
 __pycache__
 
 
 # download
-download*
+download

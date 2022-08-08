@@ -1,17 +1,15 @@
 import json
-import time
 from json import JSONDecodeError
 from pathlib import Path
 from bs4 import BeautifulSoup as BS
 
-from crawler.tool import try_get, save_info
+from crawler.tool import try_get, save_info, get_info_local
 
 
 def get_info(args, img_id, img_path) -> dict:
     """Get image info from file or url."""
     try:
-        with open(img_path / f"{str(img_id)}_info.json") as f:
-            return json.load(f)
+        return get_info_local(args, img_path / f"{str(img_id)}_info.json")
     except (JSONDecodeError, FileNotFoundError):
         url = f"https://www.pixiv.net/artworks/{img_id}"
         resp = try_get(args, url, headers=args.headers)

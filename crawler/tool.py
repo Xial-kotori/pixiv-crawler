@@ -21,11 +21,11 @@ def try_get(args, url: str, headers) -> requests.Response:
         time.sleep(args.sleep_time)
         try:
             ret = requests.get(url, headers=headers, proxies=args.proxies)
-            print(args.proxies)
             if ret.status_code != 200:
                 continue
         except Exception:
-            args.proxy_count += 5
+            if args.proxy_pool != "":
+                args.proxy_count += 5
             continue
         else:
             break
@@ -77,3 +77,11 @@ def clear_json(args):
         if file == Path("settings.json").resolve():
             continue
         file.unlink()
+
+
+def get_info_local(args, path: Path):
+    """Get info from local path."""
+    if (time.time() - path.stat().st_mtime) >= 24 * 3600:
+        raise FileNotFoundError
+    with open(path) as f:
+        return json.load(f)
