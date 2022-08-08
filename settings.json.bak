@@ -3,14 +3,8 @@
     "user-agent": "",
     "cookie": ""
   },
-  "user_id": "",
   "proxies": {
     "https": "",
     "http": ""
-  },
-  "start": 0,
-  "ser_start": {
-    "global": 0,
-    "detail": 0
   }
 }

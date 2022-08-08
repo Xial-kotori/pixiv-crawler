@@ -1,14 +1,16 @@
 # settings
 settings.json
 
-# test
-test.ipynb
-output.*
-resp.json
+# test & log
+test*
+output*
+*.log
 
 # IDE
 .vscode
 .idea
+__pycache__
+
 
 # download
-download
+download*
