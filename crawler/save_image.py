@@ -32,7 +32,8 @@ def save_img(args, img_path: Path, img_id: int, log: str = ""):
 
         img_filename = Path(url_ori).name
         if (img_path / img_filename).is_file():
-            args.logger.info(f"{log}[{i + 1}/{img_page_cnt}] Image {img_filename} has already been downloaded.")
+            args.logger.info(f"{log}[{str(i + 1).zfill(2)}/{str(img_page_cnt).zfill(2)}] "
+                             f"Image {img_filename} has already been downloaded.")
             continue
 
         img_down = try_get(args, url_ori, headers={
@@ -41,7 +42,8 @@ def save_img(args, img_path: Path, img_id: int, log: str = ""):
 
         with open(img_path / img_filename, 'wb') as f:
             f.write(img_down.content)
-            args.logger.info(f"{log}[{i + 1}/{img_page_cnt}] Image {img_filename} is downloaded successfully.")
+            args.logger.info(f"{log}[{str(i + 1).zfill(2)}/{str(img_page_cnt).zfill(2)}] "
+                             f"Image {img_filename} is downloaded successfully.")
 
 
 def save_gif(args, img_path: Path, img_id: int, log: str = ""):
@@ -56,7 +58,7 @@ def save_gif(args, img_path: Path, img_id: int, log: str = ""):
     gif_filename = Path(url_ori).name
 
     if (img_path / gif_filename).is_file():
-        args.logger.info(f"{log}GIF Compressed {gif_filename} has already been downloaded.")
+        args.logger.info(f"{log}[01/01] GIF Compressed {gif_filename} has already been downloaded.")
         return
 
     gif_down = try_get(args, url_ori, headers={

@@ -16,8 +16,9 @@ if __name__ == "__main__":
     parser.add_argument("--path", type=str, default="./download", help="Path to Save images.")
     parser.add_argument("--sleep_time", type=float, default=1, help="Sleep time between each get.")
     parser.add_argument("--proxy_pool", type=str, default="", help="Use proxy_pool from the given url.")
+    parser.add_argument("--expire", type=float, default=24, help="Update info after how many hours.")
 
-    parser.add_argument("--clear", action="store_false")
+    parser.add_argument("--clear", action="store_true")
 
     args = parser.parse_args()
 
@@ -27,6 +28,8 @@ if __name__ == "__main__":
         args.proxies = settings["proxies"]
 
     args.logger = create_logger()
+    args.logger.info("Begin crawling ...")
+
     args.proxy_count = 0
     if args.proxy_pool != "":
         get_proxy(args)
@@ -38,5 +41,9 @@ if __name__ == "__main__":
     elif args.mode == "series":
         download_series(args)
 
+    args.logger.info("Crawl successfully.")
+
     if args.clear:
+        args.logger.info("Begin cleaning json ...")
         clear_json(args)
+        args.logger.info("Clean json successfully.")

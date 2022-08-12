@@ -59,6 +59,7 @@ optional arguments:
 + `--sleep_time SLEEP_TIME` 每两个网络请求之间的间隔时间，单位为秒(s)，默认为 `1.0`
 + `--proxy_pool PROXY_POOL` IP 池，为一个 url 链接，应满足通过 `GET` 请求时能返回一个 json 文件，格式要求见附录。
 + `--clear` 添加此选项后会删掉爬取过程中生成的所有 `json` 文件
++ `--expire` 此选项给出 `json` 文件过期的时长，单位为小时 (h)
 
 ## 附录
 

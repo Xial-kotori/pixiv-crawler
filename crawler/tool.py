@@ -81,7 +81,7 @@ def clear_json(args):
 
 def get_info_local(args, path: Path):
     """Get info from local path."""
-    if (time.time() - path.stat().st_mtime) >= 24 * 3600:
+    if (time.time() - path.stat().st_mtime) >= args.expire * 3600:
         raise FileNotFoundError
     with open(path) as f:
         return json.load(f)

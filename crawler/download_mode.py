@@ -105,4 +105,6 @@ def download_series(args, ser_path: Path = "", log: str = ""):
         if works[num_in_page] not in ser_info['page']['series']:
             ser_info['page']['series'].append(works[num_in_page])
             save_info(ser_path, args.series_id, ser_info)
-        save_img(args, ser_path / str(img_id), img_id, f"{log}[{num_img + 1}/{tot_img}] ")
+        zfill_length = max(2, len(str(tot_img)))
+        save_img(args, ser_path / str(img_id), img_id,
+                 f"{log}[{str(num_img + 1).zfill(zfill_length)}/{str(tot_img).zfill(zfill_length)}] ")
