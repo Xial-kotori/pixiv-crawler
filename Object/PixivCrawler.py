@@ -263,6 +263,7 @@ class PixivCrawler:
 
         ser_ids = list(user_info['mangaSeries'])
         for num in range(len(ser_ids)):
+            self.series_id = ser_ids[num]['id']
             self.download_series(path / "Series" / str(ser_ids[num]['id']), f"[{num + 1}/{len(ser_ids)}] ")
 
     def download_series(self, ser_path: Path = "", log: str = ""):

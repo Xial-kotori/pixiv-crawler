@@ -66,6 +66,7 @@ def download_user(args):
 
     ser_ids = list(user_info['mangaSeries'])
     for num in range(len(ser_ids)):
+        args.series_id = ser_ids[num]['id']
         download_series(args, path / "Series" / str(ser_ids[num]['id']), f"[{num + 1}/{len(ser_ids)}] ")
 
 
